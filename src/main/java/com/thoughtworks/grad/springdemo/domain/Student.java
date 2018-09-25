@@ -18,4 +18,7 @@ public class Student {
     private int age;
     private double height;
 
+    @ManyToOne
+    private Clazz clazz;
+
 }

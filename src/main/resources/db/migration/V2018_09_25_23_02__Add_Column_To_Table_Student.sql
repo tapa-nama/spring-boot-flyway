@@ -1,0 +1,1 @@
+alter table `t_student` add column `clazz_id` int;
