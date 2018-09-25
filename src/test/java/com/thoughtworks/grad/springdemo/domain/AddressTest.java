@@ -12,15 +12,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class PrivilegeTest {
+class AddressTest {
     @Test
-    void should_map_privilege_entity_correctly() {
-        Privilege privilege = new Privilege();
-        assertNotNull(privilege);
+    void should_map_address_entity_correctly() {
 
-        int id = privilege.getId();
+        Address address = new Address();
+        assertNotNull(address);
+
+        int id = address.getId();
         assertEquals(0, id);
-        assertEquals("t_privilege", privilege.getClass().getAnnotation(Table.class).name());
+
+        assertEquals("t_address", Address.class.getAnnotation(Table.class).name());
+
+    }
+
+    @Test
+    void should_map_many_addresses_to_one_user_correctly() {
 
     }
 }

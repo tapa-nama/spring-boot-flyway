@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class RoleTest {
+class RoleTest {
 
     @Test
     void should_map_role_entity_correctly() {
@@ -22,7 +22,5 @@ public class RoleTest {
         int id = role.getId();
         assertEquals(0, id);
         assertEquals("t_role", role.getClass().getAnnotation(Table.class).name());
-
     }
-
 }
