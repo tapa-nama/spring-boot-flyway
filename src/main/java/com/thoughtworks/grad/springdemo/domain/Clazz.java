@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -18,8 +18,10 @@ public class Clazz {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "clazz_id")
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
+    public Clazz() {
+    }
 }

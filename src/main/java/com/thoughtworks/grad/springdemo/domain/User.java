@@ -22,7 +22,7 @@ public class User {
     @OneToOne
     public Role role;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<Address> addresses;
 
