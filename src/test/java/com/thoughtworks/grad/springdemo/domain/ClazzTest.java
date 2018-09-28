@@ -2,6 +2,7 @@ package com.thoughtworks.grad.springdemo.domain;
 
 import com.thoughtworks.grad.springdemo.repository.ClazzRepository;
 import com.thoughtworks.grad.springdemo.repository.StudentRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ClazzTest {
     private ClazzRepository clazzRepository;
     @Autowired
     private StudentRepository studentRepository;
+
     @Transactional
     @Test
     void should_create_clazz_entity_successfully() {
@@ -32,10 +34,12 @@ public class ClazzTest {
 
     @Test
     void should_add_students_to_class_and_find_them_all() {
+        //存 clazz
         Clazz clazz1 = new Clazz();
         clazz1.setName("classTwo");
         Clazz clazz2 = clazzRepository.save(clazz1);
 
+        //存student
         Student student1 = new Student("zhao", 12, 160.0, clazz2);
         Student student2 = new Student("qian", 15, 170.0, clazz2);
         Student student3 = new Student("sun", 17, 180.5, clazz2);
@@ -45,11 +49,18 @@ public class ClazzTest {
         studentRepository.save(student3);
 
 
+        // 通过"一方"维护关系
         assertEquals(3, clazzRepository
                 .findById(clazz2.getId())
                 .get()
                 .getStudents()
                 .size());
 
+    }
+
+    @AfterEach
+    void tearDown() {
+        studentRepository.deleteAllInBatch();
+        clazzRepository.deleteAllInBatch();
     }
 }
